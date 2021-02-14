@@ -16,24 +16,24 @@ Support the ability to
 - *mark* a task as **important**
 - *remove* (delete) tasks
 
-
+## Future features:
 View a list of tasks, can be displayed in different views:
 - all items sorted by date
-- all item sorted alphabetically
+- all item sorted by priority
 - only completed items
 - only important items
 
 
-A task is modeled with a title,a due date,a completion status, and a priority status.
+A task is modeled with a title, a due date, a completion status, and a priority status.
 
 
 ## User Stories
-As a user, I want to be able to add a task to my to-do list
-As a user, I want to be able to view the list of tasks on my to-do list
-As a user, I want to be able to mark a task as complete on my to-do list
-As a user, I want to be able to mark a task as important on my to-do list
-As a user, I want to be able to delete a task from my to-do-list
-As a user, I want to be able to see the number of incomplete and number of completed tasks on my to-do list
+- As a user, I want to be able to add a task to my to-do list
+- As a user, I want to be able to view the list of tasks on my to-do list
+- As a user, I want to be able to mark a task as complete on my to-do list
+- As a user, I want to be able to mark a task as important on my to-do list
+- As a user, I want to be able to delete a task from my to-do-list
+- As a user, I want to be able to see the number of incomplete and number of completed tasks on my to-do list
 
 
 
