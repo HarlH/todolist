@@ -1,11 +1,29 @@
-# My Personal Project
+# A to-do list application
 
-## A subtitle
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+## Basic features:
 
-An example of text with **bold** and *italic* fonts.  Note that the IntelliJ markdown previewer doesn't seem to render 
-the bold and italic fonts correctly but they will appear correctly on GitHub.
+Support the ability to
+- *add* a task to the to-do list
+- *edit* task
+- *mark* a task as **completed**
+- *mark* a task as **important**
+- *remove* (delete) tasks
+
+
+View a list of tasks, can be displayed in different views:
+- all items sorted by date
+- all item sorted alphabetically
+- only completed items
+- only important items
+
+
+A task is modeled with a title,a due date,a completion status, and a priority status.
+
+
+
+
+
+
+
+
