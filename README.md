@@ -28,7 +28,7 @@ A task is modeled with a title, a due date, a completion status, and a priority 
 
 
 ## User Stories
-- As a user, I want to be able to add a task to my to-do list
+- As a user, I want to be able to add multiple tasks to my to-do list
 - As a user, I want to be able to view the list of tasks on my to-do list
 - As a user, I want to be able to mark a task as complete on my to-do list
 - As a user, I want to be able to mark a task as important on my to-do list

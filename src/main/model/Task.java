@@ -5,15 +5,16 @@ import java.time.LocalDate;
 
 // A task with a title describing what to do, and a due date.
 public class Task {
-    // A String that holds the title of a task and it cannot be empty or null.
+    // A title of type string for the task
     private String title;
-    // A boolean value, if true: the task is completed, otherwise false.
+    // The completion status of boolean type for the task , if true: the task is completed, otherwise false.
     private boolean complete;
-    // A boolean value, if true: the task is important, otherwise false.
+    // The priority status of the task, if true: the task is important, otherwise false.
     private boolean important;
     // The due date of the task as yyyy-mm-dd format
     private LocalDate dueDate;
 
+    //REQUIRES: title should not be empty, and should not be the same with an existing title
     //EFFECTS: Constructs task with given description
     public Task(String title, LocalDate dueDate) {
 
