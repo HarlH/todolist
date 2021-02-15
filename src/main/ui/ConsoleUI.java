@@ -25,6 +25,7 @@ public class ConsoleUI {
         System.out.println("Add : Adds a task to the to-do list.");
         System.out.println("Remove : removes a task from the list.");
         System.out.println("View : view the todo list.");
+        System.out.println("Mark Completed : mark a task in the todo list as completed.");
         System.out.println("Quit : exit the to do list app.");
 
     }
@@ -42,6 +43,10 @@ public class ConsoleUI {
                 removeCommand();
             } else if (command.equals("view")) {
                 viewCommand();
+            } else if (command.equals("mark completed")) {
+                markCompletedCommand();
+            } else {
+                System.out.println("Command Not Recogized!");
             }
 
             System.out.println("What do you want to do? Enter a command here:");
@@ -62,24 +67,56 @@ public class ConsoleUI {
         }
     }
 
+    private void markCompletedCommand() {
+        if (toDoList.getSize() == 0) {
+            System.out.println("There is no task in the list to be marked.");
+        } else {
+            System.out.println("What is the name of the task you want to mark completed?");
+            String name = getInput();
+            toDoList.markTaskCompleted(name);
+            System.out.println("Marked task as completed");
+        }
+    }
+
+
     private void addCommand() {
         System.out.println(" What is the name of the new task?");
         String title = getInput();
-        System.out.println(" What is the due date of the new task? [example: 2021-02-15] ");
-        LocalDate dueDate = LocalDate.parse(getInput());
-        Task newTask = new Task(title, dueDate);
-        toDoList.addTask(newTask);
-        System.out.println(" Is the new task important?(Yes/No)");
-        String priority = getInput();
-        priority = priority.toLowerCase();
-        if (priority.equals("yes")) {
-            newTask.setImportant(true);
-        } else if (priority.equals("no")) {
-            newTask.setImportant(false);
-        } else {
-            System.out.println("Input not valid, set priority to Not Important");
+
+        if (checkExistingName(title)) {
+            System.out.println(" What is the due date of the new task? [example: 2021-02-15] ");
+            LocalDate dueDate = LocalDate.parse(getInput());
+            Task newTask = new Task(title, dueDate);
+            toDoList.addTask(newTask);
+            System.out.println(" Is the new task important?(Yes/No)");
+            String priority = getInput();
+            priority = priority.toLowerCase();
+            if (priority.equals("yes")) {
+                newTask.setImportant(true);
+            } else if (priority.equals("no")) {
+                newTask.setImportant(false);
+            } else {
+                System.out.println("Input not valid, set priority to Not Important");
+            }
+            System.out.println("New task added.");
         }
-        System.out.println("New task added.");
+    }
+
+    private boolean checkExistingName(String name) {
+        boolean existed = false;
+        for (Task t : toDoList.getList()) {
+            if (t.getTitle().equals(name)) {
+                existed = true;
+            } else {
+                existed = false;
+            }
+        }
+        if (existed) {
+            System.out.println("Name already existed, please try again");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private void viewCommand() {

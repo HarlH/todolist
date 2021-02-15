@@ -11,7 +11,7 @@ progress in working and studying.
 
 Support the ability to
 - *add* a task to the to-do list
-- *edit* task
+- *view* the todo list
 - *mark* a task as **completed**
 - *mark* a task as **important**
 - *remove* (delete) tasks
@@ -33,6 +33,7 @@ A task is modeled with a title, a due date, a completion status, and a priority 
 - As a user, I want to be able to mark a task as complete on my to-do list
 - As a user, I want to be able to mark a task as important on my to-do list
 - As a user, I want to be able to delete a task from my to-do-list
+## Future user stories:
 - As a user, I want to be able to see the number of incomplete and number of completed tasks on my to-do list
 
 

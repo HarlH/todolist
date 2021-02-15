@@ -32,19 +32,6 @@ public class ToDoList {
         }
     }
 
-    public void editTask(String title) {
-
-        Task selected;
-        for (Task t : list) {
-            if (t.getTitle() == title) {
-                selected = t;
-            }
-
-        }
-
-    }
-
-
     //REQUIRES: at least one task in tasks
     //EFFECTS: returns task object at given index from tasks
     public Task getTask(int index) {
