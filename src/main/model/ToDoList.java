@@ -21,7 +21,7 @@ public class ToDoList {
         for (Task t : list) {
             if (t.getTitle().equals(title)) {
                 list.remove(t);
-                return;
+
             }
         }
     }
