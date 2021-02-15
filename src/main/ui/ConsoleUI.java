@@ -6,6 +6,7 @@ import model.ToDoList;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+// a console user interface
 public class ConsoleUI {
     private ToDoList toDoList;
 
@@ -30,6 +31,8 @@ public class ConsoleUI {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: read the command of the user
     public void readCommand() {
         System.out.println("What do you want to do? Enter a command here:");
         String command = getInput();
@@ -45,7 +48,7 @@ public class ConsoleUI {
             } else if (command.equals("mark completed")) {
                 markCompletedCommand();
             } else {
-                System.out.println("Command Not Recogized!");
+                System.out.println("Command Not Recognized!");
             }
 
             System.out.println("What do you want to do? Enter a command here:");
@@ -55,6 +58,8 @@ public class ConsoleUI {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: remove a task from the list
     private void removeCommand() {
         if (toDoList.getSize() == 0) {
             System.out.println("There is no task in the list to be removed.");
@@ -66,6 +71,8 @@ public class ConsoleUI {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: mark a task in the list as completed
     private void markCompletedCommand() {
         if (toDoList.getSize() == 0) {
             System.out.println("There is no task in the list to be marked.");
@@ -78,6 +85,8 @@ public class ConsoleUI {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: add a new task to the list
     private void addCommand() {
         System.out.println(" What is the name of the new task?");
         String title = getInput();
@@ -101,10 +110,11 @@ public class ConsoleUI {
         }
     }
 
+    //EFFECTS: return false: the name already exists, otherwise return true
     private boolean checkExistingName(String name) {
         boolean existed = false;
         for (Task t : toDoList.getList()) {
-            if (t.getTitle().equals(name) || name == "") {
+            if (t.getTitle().equals(name) || name.equals("")) {
                 existed = true;
             } else {
                 existed = false;
@@ -118,16 +128,18 @@ public class ConsoleUI {
         }
     }
 
+    //EFFECTS: print information of every task in the list
     private void viewCommand() {
         for (Task i : toDoList.getList()) {
             System.out.println("Task Title: " + i.getTitle());
             System.out.println("Task Due Date: " + i.getDueDate());
-
             System.out.println("Task Priority: " + displayTaskPriority(i));
             System.out.println("Task Completion Status: " + displayTaskCompletion(i));
         }
     }
 
+
+    //EFFECTS: return the priority status of the task in type string
     private String displayTaskPriority(Task t) {
         if (t.isImportant()) {
             return "Important";
@@ -136,6 +148,7 @@ public class ConsoleUI {
         }
     }
 
+    //EFFECTS: return the completion status of the task in type string
     private String displayTaskCompletion(Task t) {
         if (t.isComplete()) {
             return "Completed";
