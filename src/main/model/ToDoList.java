@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+
+// A to-do list containing tasks and functions to add, remove, and marked completed
 public class ToDoList {
     private ArrayList<Task> list = new ArrayList<>();
 
@@ -24,6 +26,8 @@ public class ToDoList {
         }
     }
 
+    //REQUIRES: at least one task in the list
+    //EFFECTS: mark the task object with the same title as the parameter as completed
     public void markTaskCompleted(String title) {
         for (Task t : list) {
             if (t.getTitle().equals(title)) {
@@ -32,15 +36,16 @@ public class ToDoList {
         }
     }
 
-    //REQUIRES: at least one task in tasks
-    //EFFECTS: returns task object at given index from tasks
-    public Task getTask(int index) {
-        return list.get(index);
-    }
 
     //EFFECTS: returns the to-do list
     public ArrayList<Task> getList() {
         return list;
+    }
+
+    //REQUIRES: at least one task in tasks
+    //EFFECTS: returns task object at given index from tasks
+    public Task getTask(int index) {
+        return list.get(index);
     }
 
 

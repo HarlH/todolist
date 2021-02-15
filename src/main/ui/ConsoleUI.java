@@ -12,7 +12,6 @@ public class ConsoleUI {
 
     public ConsoleUI() {
         toDoList = new ToDoList();
-
         startUp();
         readCommand();
 
@@ -105,14 +104,14 @@ public class ConsoleUI {
     private boolean checkExistingName(String name) {
         boolean existed = false;
         for (Task t : toDoList.getList()) {
-            if (t.getTitle().equals(name)) {
+            if (t.getTitle().equals(name) || name == "") {
                 existed = true;
             } else {
                 existed = false;
             }
         }
         if (existed) {
-            System.out.println("Name already existed, please try again");
+            System.out.println("Name is empty or already exists, please try again");
             return false;
         } else {
             return true;
