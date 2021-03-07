@@ -33,6 +33,10 @@ A task is modeled with a title, a due date, a completion status, and a priority 
 - As a user, I want to be able to mark a task as complete on my to-do list
 - As a user, I want to be able to mark a task as important on my to-do list
 - As a user, I want to be able to delete a task from my to-do-list
+- As a user, I want to be able to save my to-do list to file
+- As a user, I want to be able to be able to load my to-do list from file 
+- As a user, when I select the quit option from the application menu, I want to be reminded to save 
+my to-do list to file and have the option to do so or not.
 ## Future user stories:
 - As a user, I want to be able to see the number of incomplete and number of completed tasks on my to-do list
 
