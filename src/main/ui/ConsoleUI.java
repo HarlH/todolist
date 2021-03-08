@@ -16,10 +16,11 @@ public class ConsoleUI {
     private ToDoList toDoList;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-
+    private Scanner input;
 
 
     public ConsoleUI() {
+        input = new Scanner(System.in);
         toDoList = new ToDoList();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -35,6 +36,8 @@ public class ConsoleUI {
         System.out.println("Add : Adds a task to the to-do list.");
         System.out.println("Remove : removes a task from the list.");
         System.out.println("View : view the todo list.");
+        System.out.println("Save : save the todo list to file.");
+        System.out.println("Load : load the todo list from file.");
         System.out.println("Mark Completed : mark a task in the todo list as completed.");
         System.out.println("Quit : exit the to do list app.");
 
@@ -44,36 +47,47 @@ public class ConsoleUI {
     //MODIFIES: this
     //EFFECTS: read the command of the user
     public void readCommand() {
-        System.out.println("What do you want to do? Enter a command here:");
-        String command = getInput();
-        command = command.toLowerCase();
+        boolean keepGoing = true;
+        input = new Scanner(System.in);
+        String command = null;
 
-        while (!command.equals("quit")) {
-            if (command.equals("add")) {
-                addCommand();
-            } else if (command.equals("remove")) {
-                removeCommand();
-            } else if (command.equals("view")) {
-                viewCommand();
-            } else if (command.equals("mark completed")) {
-                markCompletedCommand();
-            } else if (command.equals("save")) {
-                saveCommand();
-            } else if (command.equals("load")) {
-                loadCommand();
-            } else {
-                System.out.println("Command Not Recognized!");
-            }
-
+        while (keepGoing) {
             System.out.println("What do you want to do? Enter a command here:");
-            command = getInput();
+            command = input.next();
             command = command.toLowerCase();
+            if (command.equals("quit")) {
+                keepGoing = false;
+            } else {
+                processCommand(command);
+            }
         }
-
     }
+
+    // MODIFIES: this
+    // EFFECTS: processes user command
+    private void processCommand(String command) {
+        if (command.equals("add")) {
+            addCommand();
+        } else if (command.equals("remove")) {
+            removeCommand();
+        } else if (command.equals("view")) {
+            viewCommand();
+        } else if (command.equals("mark completed")) {
+            markCompletedCommand();
+        } else if (command.equals("save")) {
+            saveCommand();
+        } else if (command.equals("load")) {
+            loadCommand();
+        } else {
+            System.out.println("Command Not Recognized!");
+        }
+    }
+
+
 
     //MODIFIES: this
     //EFFECTS: remove a task from the list
+
     private void removeCommand() {
         if (toDoList.getSize() == 0) {
             System.out.println("There is no task in the list to be removed.");
