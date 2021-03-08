@@ -1,10 +1,13 @@
 package model;
 
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDate;
 
 // A task with a title describing what to do, and a due date.
-public class Task {
+public class Task implements Writable {
     // A title of type string for the task
     private String title;
     // The completion status of boolean type for the task , if true: the task is completed, otherwise false.
@@ -67,5 +70,16 @@ public class Task {
     //EFFECTS: returns the important status of this
     public boolean isImportant() {
         return important;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("complete", complete);
+        json.put("important", important);
+        json.put("dueDate", dueDate);
+        return json;
     }
 }

@@ -50,7 +50,7 @@ public class ToDoListTest {
         ArrayList<Task> arrayList = new ArrayList<>();
         arrayList.add(aTask);
         arrayList.add(bTask);
-        assertEquals(arrayList, myToDoList.getList());
+        assertEquals(arrayList, myToDoList.getTaskList());
     }
 
 

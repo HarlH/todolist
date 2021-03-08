@@ -2,17 +2,27 @@ package ui;
 
 import model.Task;
 import model.ToDoList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 // a console user interface
 public class ConsoleUI {
+    private static final String JSON_STORE = "./data/todolist.json";
     private ToDoList toDoList;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
 
 
     public ConsoleUI() {
         toDoList = new ToDoList();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         startUp();
         readCommand();
 
@@ -47,6 +57,10 @@ public class ConsoleUI {
                 viewCommand();
             } else if (command.equals("mark completed")) {
                 markCompletedCommand();
+            } else if (command.equals("save")) {
+                saveCommand();
+            } else if (command.equals("load")) {
+                loadCommand();
             } else {
                 System.out.println("Command Not Recognized!");
             }
@@ -113,7 +127,7 @@ public class ConsoleUI {
     //EFFECTS: return false: the name already exists, otherwise return true
     private boolean checkExistingName(String name) {
         boolean existed = false;
-        for (Task t : toDoList.getList()) {
+        for (Task t : toDoList.getTaskList()) {
             if (t.getTitle().equals(name) || name.equals("")) {
                 existed = true;
             } else {
@@ -130,11 +144,38 @@ public class ConsoleUI {
 
     //EFFECTS: print information of every task in the list
     private void viewCommand() {
-        for (Task i : toDoList.getList()) {
+        for (Task i : toDoList.getTaskList()) {
             System.out.println("Task Title: " + i.getTitle());
             System.out.println("Task Due Date: " + i.getDueDate());
             System.out.println("Task Priority: " + displayTaskPriority(i));
             System.out.println("Task Completion Status: " + displayTaskCompletion(i));
+        }
+    }
+
+    /// Code taken and modified from JsonWriter.java package in JsonSerializationDemo
+    //// URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: saves the to-do list to file
+    private void saveCommand() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(toDoList);
+            jsonWriter.close();
+            System.out.println("Saved to-do list to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    /// Code taken and modified from JsonWriter.java package in JsonSerializationDemo
+    //// URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // MODIFIES: this
+    // EFFECTS: loads to-do list from file
+    private void loadCommand() {
+        try {
+            toDoList = jsonReader.read();
+            System.out.println("Loaded to-do list from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 
