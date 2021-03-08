@@ -16,11 +16,9 @@ public class ConsoleUI {
     private ToDoList toDoList;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private Scanner input;
 
 
     public ConsoleUI() {
-        input = new Scanner(System.in);
         toDoList = new ToDoList();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -47,42 +45,33 @@ public class ConsoleUI {
     //MODIFIES: this
     //EFFECTS: read the command of the user
     public void readCommand() {
-        boolean keepGoing = true;
-        input = new Scanner(System.in);
-        String command = null;
+        System.out.println("What do you want to do? Enter a command here:");
+        String command = getInput();
+        command = command.toLowerCase();
 
-        while (keepGoing) {
-            System.out.println("What do you want to do? Enter a command here:");
-            command = input.next();
-            command = command.toLowerCase();
-            if (command.equals("quit")) {
-                keepGoing = false;
+        while (!command.equals("quit")) {
+            if (command.equals("add")) {
+                addCommand();
+            } else if (command.equals("remove")) {
+                removeCommand();
+            } else if (command.equals("view")) {
+                viewCommand();
+            } else if (command.equals("mark completed")) {
+                markCompletedCommand();
+            } else if (command.equals("save")) {
+                saveCommand();
+            } else if (command.equals("load")) {
+                loadCommand();
             } else {
-                processCommand(command);
+                System.out.println("Command Not Recognized!");
             }
-        }
-    }
 
-    // MODIFIES: this
-    // EFFECTS: processes user command
-    private void processCommand(String command) {
-        if (command.equals("add")) {
-            addCommand();
-        } else if (command.equals("remove")) {
-            removeCommand();
-        } else if (command.equals("view")) {
-            viewCommand();
-        } else if (command.equals("mark completed")) {
-            markCompletedCommand();
-        } else if (command.equals("save")) {
-            saveCommand();
-        } else if (command.equals("load")) {
-            loadCommand();
-        } else {
-            System.out.println("Command Not Recognized!");
+            System.out.println("What do you want to do? Enter a command here:");
+            command = getInput();
+            command = command.toLowerCase();
         }
-    }
 
+    }
 
 
     //MODIFIES: this
@@ -96,6 +85,7 @@ public class ConsoleUI {
             String name = getInput();
             toDoList.removeTask(name);
             System.out.println("Task removed");
+            saveCommand();
         }
     }
 
@@ -109,6 +99,7 @@ public class ConsoleUI {
             String name = getInput();
             toDoList.markTaskCompleted(name);
             System.out.println("Marked task as completed");
+            saveCommand();
         }
     }
 
