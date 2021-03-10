@@ -69,7 +69,7 @@ public class JsonReader {
         boolean important = jsonObject.getBoolean("important");
         Task newTask = new Task(name, dueDate);
         newTask.setComplete(complete);
-        newTask.setComplete(important);
+        newTask.setImportant(important);
 
         toDoList.addTask(newTask);
     }

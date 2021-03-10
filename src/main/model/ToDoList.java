@@ -20,7 +20,7 @@ public class ToDoList implements Writable {
 
     //REQUIRES: at least one task in the list
     //EFFECTS: removes task object with the same title as the parameter
-    public void removeTask(String title) {
+    public void removeTask(String title)  {
         for (Task t : taskList) {
             if (t.getTitle().equals(title)) {
                 taskList.remove(t);
