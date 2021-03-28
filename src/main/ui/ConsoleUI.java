@@ -84,7 +84,6 @@ public class ConsoleUI {
             System.out.println("What is the name of the task you want to remove?");
             String name = getInput();
             toDoList.removeTask(name);
-            System.out.println("Task removed");
             saveCommand();
         }
     }
