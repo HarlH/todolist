@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
+
+// a button that allows user to add a new task to the to-do list
 public class AddButton extends Buttons {
     private Task task;
 
@@ -35,19 +37,19 @@ public class AddButton extends Buttons {
 
         // MODIFIES: todoList
         // EFFECTS: when button is pressed, get data from the fields in the panel and construct
-        //          an item based on the data, and reset text field and combo box
+        //          a task based on the data, and reset text field and combo box
         @Override
         public void actionPerformed(ActionEvent e) {
             Toolkit.getDefaultToolkit().beep();
-            String name = todoList.getAddName();
+            String name = todoList.getAddTitle();
             String importance = todoList.getImportance();
             LocalDate dueDate = LocalDate.parse(todoList.getDueDate());
 
-            if (importance.equals(todoList.important)) {
+            if (importance.equals("Important")) {
                 task = new Task(name, dueDate);
                 task.setImportant(true);
                 todoList.addTask(task);
-            } else if (importance.equals(todoList.notImportant)) {
+            } else if (importance.equals("Not Important")) {
                 task = new Task(name, dueDate);
                 task.setImportant(false);
                 todoList.addTask(task);

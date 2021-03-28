@@ -7,6 +7,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
+// a text field for user to marked complete and delete a task
 public class MarkCompletedField extends TextField {
     public MarkCompletedField(ToDoListUI todoList, JComponent parent, GridBagConstraints gc) {
         super(todoList, parent, gc);
@@ -40,9 +41,9 @@ public class MarkCompletedField extends TextField {
         public void changed() {
             String name = todoList.getCompleteName();
             if (!name.isEmpty()) {
-                todoList.complete.setEnabled(true);
+                todoList.setEnabledCompletedButton(true);
             } else {
-                todoList.complete.setEnabled(false);
+                todoList.setEnabledCompletedButton(false);
             }
         }
     }

@@ -6,10 +6,13 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-public class AddNameField extends TextField {
+// a text field for user to write the title of the task they want to add
+public class AddTitleField extends TextField {
 
-    public AddNameField(ToDoListUI todoList, JComponent parent, GridBagConstraints gc) {
+    public AddTitleField(ToDoListUI todoList, JComponent parent, GridBagConstraints gc) {
         super(todoList, parent, gc);
     }
 
@@ -37,14 +40,27 @@ public class AddNameField extends TextField {
         }
 
         // MODIFIES: todoList
-        // EFFECTS: enables the add button when text field is not empty and other conditions
+        // EFFECTS: enables the add button when text field is not empty and due date field is not empty and in format
         private void changed() {
             String name = textField.getText();
 
-            if (!name.isEmpty() && !todoList.getDueDate().isEmpty()) {
-                todoList.add.setEnabled(true);
+            String duedate = todoList.getDueDate();
+            boolean dateInFormat;
+
+            try {
+                LocalDate.parse(duedate);
+                dateInFormat = true;
+
+            } catch (DateTimeParseException d) {
+                todoList.setEnabledAddButton(false);
+                dateInFormat = false;
+            }
+
+
+            if (!name.isEmpty() && dateInFormat) {
+                todoList.setEnabledAddButton(true);
             } else {
-                todoList.add.setEnabled(false);
+                todoList.setEnabledAddButton(false);
             }
         }
     }

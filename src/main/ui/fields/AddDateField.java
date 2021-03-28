@@ -9,6 +9,8 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+
+// a text field for user to write the due date of the task they want to add
 public class AddDateField extends TextField {
 
     public AddDateField(ToDoListUI todoList, JComponent parent, GridBagConstraints gc) {
@@ -43,15 +45,15 @@ public class AddDateField extends TextField {
         public void changed() {
             String duedate = textField.getText();
             if (!duedate.isEmpty()) {
-                todoList.add.setEnabled(true);
+                todoList.setEnabledAddButton(true);
             } else {
-                todoList.add.setEnabled(false);
+                todoList.setEnabledAddButton(false);
             }
 
             try {
                 LocalDate.parse(duedate);
             } catch (DateTimeParseException d) {
-                todoList.add.setEnabled(false);
+                todoList.setEnabledAddButton(false);
             }
 
         }

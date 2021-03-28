@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+//a button that allows user to marked a task as completed and remove the task from the to-do list
 public class MarkCompletedButton extends Buttons {
 
     public MarkCompletedButton(ToDoListUI todoList, JComponent parent, GridBagConstraints gc) {
@@ -31,7 +33,7 @@ public class MarkCompletedButton extends Buttons {
     private class CompleteToolCLickHandler implements ActionListener {
 
         // MODIFIES: todoList
-        // EFFECTS: when button is pressed, complete the item with the given name and clear text field
+        // EFFECTS: when button is pressed, complete the task with the given title and clear text field
         @Override
         public void actionPerformed(ActionEvent e) {
             Toolkit.getDefaultToolkit().beep();
