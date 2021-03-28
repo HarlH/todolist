@@ -72,6 +72,15 @@ public class Task implements Writable {
         return important;
     }
 
+    //EFFECTS: returns the completion status of this in string
+    public String getStatus() {
+        if (important) {
+            return "Important";
+        } else {
+            return "Not Important";
+        }
+    }
+
 
     @Override
     public JSONObject toJson() {

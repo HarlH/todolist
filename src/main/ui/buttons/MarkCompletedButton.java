@@ -37,7 +37,9 @@ public class MarkCompletedButton extends Buttons {
             Toolkit.getDefaultToolkit().beep();
             String name = todoList.getCompleteName();
             todoList.completeTask(name);
+
             todoList.setCompletedNameField();
+            todoList.viewList(todoList.getToDoList());
         }
     }
 }

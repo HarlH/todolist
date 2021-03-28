@@ -47,14 +47,15 @@ public class AddButton extends Buttons {
                 task = new Task(name, dueDate);
                 task.setImportant(true);
                 todoList.addTask(task);
-            } else if (importance.equals(todoList.NotImportant)) {
+            } else if (importance.equals(todoList.notImportant)) {
                 task = new Task(name, dueDate);
                 task.setImportant(false);
                 todoList.addTask(task);
             }
             todoList.setAddNameField();
-            //todoList.setImportance();
+            todoList.setImportance();
             todoList.setDateField();
+            todoList.viewList(todoList.getToDoList());
         }
     }
 }

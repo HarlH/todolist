@@ -40,7 +40,6 @@ public class AddNameField extends TextField {
         // EFFECTS: enables the add button when text field is not empty and other conditions
         private void changed() {
             String name = textField.getText();
-            String duedate = todoList.getDueDate();
 
             if (!name.isEmpty() && !todoList.getDueDate().isEmpty()) {
                 todoList.add.setEnabled(true);

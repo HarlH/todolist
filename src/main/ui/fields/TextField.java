@@ -12,7 +12,7 @@ public abstract class TextField {
     public TextField(ToDoListUI todoList, JComponent parent, GridBagConstraints gc) {
         this.todoList = todoList;
         textField = new JTextField(10);
-        textField.setFont(todoList.textFieldFont);
+        textField.setFont(todoList.getTextFieldFont());
         addToParent(parent, gc);
         addListener();
     }
