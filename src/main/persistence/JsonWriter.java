@@ -44,7 +44,7 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes string to file
-    private void saveToFile(String json) {
+    public void saveToFile(String json) {
         writer.print(json);
     }
 }

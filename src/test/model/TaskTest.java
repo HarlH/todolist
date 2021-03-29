@@ -1,9 +1,14 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -73,7 +78,37 @@ public class TaskTest {
         assertFalse(myTask.isComplete());
     }
 
+    @Test
+    public void testGetStatus() {
+        assertFalse(myTask.isImportant());
+        assertEquals("Not Important", myTask.getStatus());
+        myTask.setImportant(true);
+        assertTrue(myTask.isImportant());
+        assertEquals("Important", myTask.getStatus());
+    }
 
+    /*@Test
+    public void testToJson() {
+        try {
+
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.put(myTask.toJson());
+            JSONObject json = new JSONObject();
+            json.put("todolist", jsonArray);
+
+            JsonWriter writer = new JsonWriter("./data/testToJsonTask.json");
+            writer.open();
+            writer.saveToFile(json.toString(4));
+
+
+            JsonReader reader = new JsonReader("./data/testToJsonTask.json");
+            ToDoList taskList = reader.read();
+            assertEquals(1, taskList.getSize());
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+*/
 
 
 }
