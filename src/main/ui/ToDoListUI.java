@@ -3,17 +3,10 @@ package ui;
 import model.Task;
 import model.ToDoList;
 import ui.buttons.*;
-import ui.fields.AddDateField;
-import ui.fields.AddImportanceField;
-import ui.fields.AddTitleField;
-import ui.fields.MarkCompletedField;
+import ui.fields.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 /*
  * Represents the main window in which the to do list is displayed
@@ -129,47 +122,24 @@ public class ToDoListUI extends JFrame {
                 BorderFactory.createTitledBorder("Add a new Task:"),
                 BorderFactory.createEmptyBorder(40, 10, 20, 10)));
         GridBagConstraints addPanelConstraints = new GridBagConstraints();
-        addPanelConstraints.weightx = 0.5;
-        addPanelConstraints.weighty = 0.5;
-        addPanelConstraints.insets = new Insets(0, 0, 10, 0);
+        constraintSetup(addPanelConstraints);
 
         name = new JLabel("Task Title: ");
-        addPanelConstraints.anchor = GridBagConstraints.LINE_END;
-        addPanelConstraints.gridx = 0;
-        addPanelConstraints.gridy = 0;
+        nameConstraint(addPanelConstraints);
         addPanel.add(name, addPanelConstraints);
 
-        addPanelConstraints.anchor = GridBagConstraints.LINE_START;
-        addPanelConstraints.gridx = 1;
+        titleFieldConstraint(addPanelConstraints);
         addTitleField = new AddTitleField(this, addPanel, addPanelConstraints);
 
 
-
         importance = new JComboBox(types);
-        importance.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JComboBox typeBox = (JComboBox) e.getSource();
-                String selected = (String) typeBox.getSelectedItem();
-                if (selected.equals(important)) {
-                    add.setEnabled(false);
-                } else if (selected.equals(notImportant)) {
-                    if (addTitleField.getFieldText().isEmpty()) {
-                        add.setEnabled(false);
-                    } else {
-                        add.setEnabled(true);
-                    }
-                }
-            }
-        });
-        addPanelConstraints.anchor = GridBagConstraints.BASELINE;
-        addPanelConstraints.gridy = 1;
+        importance.addActionListener(new ImportanceActionListener(this));
+
+        importanceConstraint(addPanelConstraints);
         addPanel.add(importance, addPanelConstraints);
 
         dueDate = new JLabel("Due Date (example: 2020-12-25): ");
-        addPanelConstraints.anchor = GridBagConstraints.LINE_END;
-        addPanelConstraints.gridx = 0;
-        addPanelConstraints.gridy = 2;
+        dueDateConstraint(addPanelConstraints);
         addPanel.add(dueDate, addPanelConstraints);
 
 
@@ -181,6 +151,44 @@ public class ToDoListUI extends JFrame {
         add = new AddButton(this, addPanel, addPanelConstraints);
     }
 
+
+    //MODIFIES: gc
+    //EFFECTS: set up the constraint
+    private void constraintSetup(GridBagConstraints gc) {
+        gc.weightx = 0.5;
+        gc.weighty = 0.5;
+        gc.insets = new Insets(0, 0, 10, 0);
+    }
+
+    //MODIFIES: gc
+    //EFFECTS: set up the constraint for the title of the task
+    private void nameConstraint(GridBagConstraints gc) {
+        gc.anchor = GridBagConstraints.LINE_END;
+        gc.gridx = 0;
+        gc.gridy = 0;
+    }
+
+    //MODIFIES: gc
+    //EFFECTS: set up the constraint for the due date of the task
+    private void dueDateConstraint(GridBagConstraints gc) {
+        gc.anchor = GridBagConstraints.LINE_END;
+        gc.gridx = 0;
+        gc.gridy = 2;
+    }
+
+    //MODIFIES: gc
+    //EFFECTS: set up the constraint for the title field of the task
+    private void titleFieldConstraint(GridBagConstraints gc) {
+        gc.anchor = GridBagConstraints.LINE_START;
+        gc.gridx = 1;
+    }
+
+    //MODIFIES: gc
+    //EFFECTS: set up the constraint for the priority status of the task
+    private void importanceConstraint(GridBagConstraints gc) {
+        gc.anchor = GridBagConstraints.BASELINE;
+        gc.gridy = 1;
+    }
 
     // MODIFIES: this
     // EFFECTS: constructs the area where the user can input the item they want to be completed
@@ -210,10 +218,16 @@ public class ToDoListUI extends JFrame {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: add task to the to-do list
     public void addTask(Task t) {
         toDoList.addTask(t);
     }
 
+
+
+    //MODIFIES: this
+    //EFFECTS: print every tasks currently in the to-do list
     public void viewList(ToDoList toDoList) {
         StringBuilder sb = new StringBuilder();
         if (toDoList.getSize() >= 1) {
@@ -238,17 +252,23 @@ public class ToDoListUI extends JFrame {
         textArea.setText(txt);
     }
 
+    // MODIFIES: this
+    // EFFECTS: mark a task as completed and remove the task from the to-do list
     public void completeTask(String name) {
         toDoList.markTaskCompleted(name);
         toDoList.removeTask(name);
         System.out.println("Marked task as completed");
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: enable or disable the add button
     public void setEnabledAddButton(Boolean b) {
         add.setEnabled(b);
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: enable or disable the completed button
     public void setEnabledCompletedButton(Boolean b) {
         complete.setEnabled(b);
     }
@@ -281,12 +301,6 @@ public class ToDoListUI extends JFrame {
     // EFFECTS: gets the text in the name field in the complete area
     public String getCompleteName() {
         return markCompletedField.getFieldText();
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sets the name field in the complete area to empty
-    public void setCompleteNameField() {
-        markCompletedField.setEmpty();
     }
 
     // EFFECTS: gets the text in the name field in the add area
