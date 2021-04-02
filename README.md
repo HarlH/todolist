@@ -17,12 +17,6 @@ Support the ability to
 - *remove* (delete) tasks
 
 
-## Future features:
-View a list of tasks, can be displayed in different views:
-- all items sorted by date
-- all item sorted by priority
-- only completed items
-- only important items
 
 
 A task is modeled with a title, a due date, a completion status, and a priority status.
@@ -35,13 +29,25 @@ A task is modeled with a title, a due date, a completion status, and a priority 
 - As a user, I want to be able to mark a task as important on my to-do list
 - As a user, I want to be able to delete a task from my to-do-list
 - As a user, I want to be able to save my to-do list to file
-- As a user, I want to be able to be able to load my to-do list from file 
-
-## Future user stories:
-- As a user, I want to be able to see the number of incomplete and number of completed tasks on my to-do list
+- As a user, I want to be able to load my to-do list from file 
 
 
+## Phase 4: Task 2
 
+Type hierarchy: 
+
+ TextField: The interface TextField has AddDateField, AddTitleField and
+ MarkCompletedField as its subclasses.
+ 
+They all override the addListener method to perform different actions 
+ and check different requirements for each field (for example, AddDateField
+ will make sure that the date inserted into the field must be in the form YYYY-MM-DD, otherwise 
+ the add button won't be enabled) 
+
+Buttons:
+Similarly, I also have AddButton, MarkCompletedButton, LoadButton
+and SaveButton implements the Buttons interface. Each of the button perform different
+actions when clicked by overriding the addListener method. 
 
 
 
