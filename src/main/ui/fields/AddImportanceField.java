@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// a box for user to choose the importance status of the task they want to add
 public class AddImportanceField extends JComboBox {
     private JComboBox importance;
     private ToDoListUI toDoList;

@@ -50,4 +50,13 @@ and SaveButton implements the Buttons interface. Each of the button perform diff
 actions when clicked by overriding the addListener method. 
 
 
-
+## Phase 4: Task 3
+After having a review on my design of the project, I realize that created one redundant
+class which is the AddImportanceField Class. In the early phase of the project, I planned to make a separate
+class to create a box for users to choose their task's importance status
+(the Single Point of Control from 110). However, while trying to implement all sorts of things
+in the GUI, I ended up creating an entire box from scratch and did not make use of the class.
+I also create 2 panels inside the ToDoListUI. If I had more time to work on the project, 
+I would create two classes to implement the functionality of the two panels. Then,
+replace the two methods to create panels and the method to create the importance box
+with calls from the new classes and the AddImportanceField class.
